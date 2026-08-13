@@ -1,29 +1,26 @@
 # 🛒 Tamkeen Market - End-to-End E-Commerce Data Analytics & BI Pipeline
 
 ## 📌 Project Overview
-An end-to-end data analytics and business intelligence solution for **Tamkeen Market**, an e-commerce platform in Saudi Arabia. 
+An end-to-end data analytics and business intelligence project for **Tamkeen Market**, an e-commerce platform in Saudi Arabia. 
 
-This project covers the full data lifecycle: initial extraction, cleaning, and feature engineering in **Python**, relational database deployment with **SQLite / SQL**, interactive dashboard design in **Power BI**, and executive pivot modeling in **Excel**.
+This project covers the full data lifecycle in a single workflow: raw ETL, data cleaning, feature engineering, and embedded **SQLite / SQL** querying inside **Python (Jupyter Notebook)**, followed by interactive dashboard design in **Power BI** and pivot modeling in **Excel**.
 
 ---
 
 ## 🛠️ Complete Project Pipeline & Stack
 
-### 1. Python Data Pipeline (`pandas`, `sqlite3`, `numpy`)
-* **Data Cleaning & Handling Nulls:** Filled missing cities with `Unknown` in `customers`, imputed missing brands, and dynamically mapped missing `unit_price` from the product catalog.
-* **Feature Engineering:** Calculated exact `net_sales` accounting for discount percentages, and computed `gross_profit` across 180,000+ order item records.
-* **Type Conversion & Standardization:** Converted raw datetime strings to `datetime64` types and exported 8 cleaned CSV datasets.
-* **Database Deployment:** Programmatically created a `sqlite3` database (`tamkeen_market.db`) and ingested all cleaned relational tables.
+### 1. Python & Embedded SQLite Pipeline (`eda_cleaning.ipynb`)
+* **Data Cleaning & Null Imputation:** Handled missing values (filled missing cities with `Unknown` in `customers`, imputed missing brands in `products`, dynamically mapped missing `unit_price` from the catalog, and defaulted missing discounts to 0).
+* **Feature Engineering:** Calculated exact `net_sales` (accounting for discount percentages) and `gross_profit` across 180,000+ order item records.
+* **Standardization & Clean Export:** Converted date strings to `datetime64` objects and exported 8 cleaned CSV datasets.
+* **Embedded SQLite Database:** Created an in-memory/file-based `sqlite3` database directly within the notebook and loaded all 8 cleaned tables.
+* **In-Notebook SQL Queries:** Executed SQL queries via `pd.read_sql_query()` to calculate KPIs, monthly revenue trends, city/category performance, return reasons, and delivery efficiency.
 
-### 2. Relational SQL Analysis
-* Ran SQL queries directly against SQLite to aggregate executive-level business metrics.
-* Evaluated regional performance, monthly sales trends, customer behavior, return reasons, and delivery efficiency across warehouses.
+### 2. Power BI Executive Dashboard (`tamkeen_dashboard.pbix`)
+* Built a dynamic, multi-visual dashboard featuring DAX measures, custom slicers, regional performance, category metrics, and marketing channel distribution.
 
-### 3. Power BI Executive Dashboard
-* Built a dynamic, multi-visual dashboard featuring DAX measures, custom year filters, regional bar/column performance, category metrics, and marketing channel distribution.
-
-### 4. Excel Business Summary
-* Built Pivot Tables and Pivot Charts from cleaned datasets to perform quick validation and regional sales breakdowns.
+### 3. Excel Business Summary (`Tamkeen_Market_Analysis.xlsx`)
+* Created Pivot Tables and Pivot Charts from cleaned datasets for quick validation and regional sales breakdowns.
 
 ---
 
@@ -40,14 +37,9 @@ This project covers the full data lifecycle: initial extraction, cleaning, and f
 
 ---
 
-## 📁 Data Model Summary
+## 📁 Repository Structure
 
-The project processes 8 core relational entities:
-* `customers` (25,000 rows)
-* `products` (500 rows)
-* `orders` (120,000 rows)
-* `order_items` (180,047 rows)
-* `deliveries` (120,000 rows)
-* `returns` (6,643 rows)
-* `warehouses` (5 rows)
-* `marketing_channels` (7 rows)
+├── eda_cleaning.ipynb            # Python ETL, Missing Value Handling, & In-Notebook SQLite Queries
+├── Tamkeen_Market_Analysis.xlsx  # Excel Pivot Tables & Visuals
+├── tamkeen_dashboard.pbix        # Interactive Power BI Dashboard
+└── README.md                     # Project Documentation
